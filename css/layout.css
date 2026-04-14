@@ -1,0 +1,115 @@
+/* ============================================================
+   LAYOUT — Container, section wrappers, grid utilities
+   ============================================================ */
+
+/* ── Container ── */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 5vw, 2.5rem);
+}
+
+/* ── Section base ── */
+.section {
+  padding-block: var(--section-py);
+  position: relative;
+}
+
+.section--alt {
+  background-color: var(--clr-bg-secondary);
+}
+
+/* ── Section header ── */
+.section__header {
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.section__label {
+  display: inline-block;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  margin-bottom: var(--space-3);
+}
+
+.section__title {
+  font-size: clamp(var(--fs-2xl), 4vw, var(--fs-4xl));
+  font-weight: 700;
+  color: var(--clr-text-strong);
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+}
+
+.section__title::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--clr-accent), var(--clr-accent-2));
+  border-radius: var(--radius-full);
+  margin: var(--space-4) auto 0;
+}
+
+/* Left-aligned title variant */
+.section__title--left::after {
+  margin-left: 0;
+}
+
+.section__subtitle {
+  font-size: var(--fs-lg);
+  color: var(--clr-text-muted);
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+/* ── Grid utilities ── */
+.grid {
+  display: grid;
+  gap: var(--content-gap);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Responsive grid that wraps at a minimum size */
+.auto-grid {
+  display: grid;
+  gap: var(--content-gap);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* ── Flex utilities ── */
+.flex          { display: flex; }
+.flex-center   { display: flex; align-items: center; justify-content: center; }
+.flex-between  { display: flex; align-items: center; justify-content: space-between; }
+.flex-col      { display: flex; flex-direction: column; }
+.flex-wrap     { flex-wrap: wrap; }
+.gap-2         { gap: var(--space-2); }
+.gap-4         { gap: var(--space-4); }
+.gap-6         { gap: var(--space-6); }
+.gap-8         { gap: var(--space-8); }
+
+/* ── Visibility utilities ── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── Responsive breakpoints ── */
+@media (max-width: 1024px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid-2,
+  .grid-3 { grid-template-columns: 1fr; }
+}

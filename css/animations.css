@@ -1,0 +1,111 @@
+/* ============================================================
+   ANIMATIONS — Keyframes + scroll-reveal trigger classes
+   ============================================================ */
+
+/* ── Keyframes ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Skill bar sheen sweep */
+@keyframes sheen {
+  from { left: -100%; }
+  to   { left: 100%; }
+}
+
+/* Gradient ring spin around photo */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Typing cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Floating/bob for hero photo */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* Pulse glow */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 10px var(--clr-accent-glow); }
+  50%       { box-shadow: 0 0 30px var(--clr-accent-glow), 0 0 60px var(--clr-accent-glow2); }
+}
+
+/* Slide in from right (toast) */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Dot bounce loading */
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40%            { transform: scale(1); }
+}
+
+/* ── Scroll-reveal base state ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--t-enter), transform var(--t-enter);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for child elements */
+.reveal-stagger > *       { opacity: 0; transform: translateY(20px); transition: opacity var(--t-enter), transform var(--t-enter); }
+.reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+.reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.19s; }
+.reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.26s; }
+.reveal-stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.33s; }
+.reveal-stagger.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.40s; }
+.reveal-stagger.visible > *:nth-child(7) { opacity: 1; transform: none; transition-delay: 0.47s; }
+.reveal-stagger.visible > *:nth-child(8) { opacity: 1; transform: none; transition-delay: 0.54s; }
+.reveal-stagger.visible > *:nth-child(n+9) { opacity: 1; transform: none; transition-delay: 0.60s; }
+
+/* Fade-from-left variant */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity var(--t-enter), transform var(--t-enter);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale variant */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity var(--t-enter), transform var(--t-enter);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
