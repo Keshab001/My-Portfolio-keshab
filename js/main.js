@@ -91,10 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
   navManager.init();
   skillsManager.init(); // must run before initReveal so .skill-bar elements exist
   contactManager.init();
+  matrixFx.init();      // rain + boot screen; runs after i18n so text is translated
 
   // Global visual effects
   initReveal();
-  initTypewriter();
   initCounters();
   initNavHighlightOnLoad();
+
+  // Hero text animates only once the boot screen has cleared
+  matrixFx.whenBooted().then(() => {
+    initTypewriter();
+    matrixFx.scramble(document.querySelector('.hero__name'), 1100);
+  });
 });

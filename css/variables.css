@@ -1,45 +1,54 @@
 /* ============================================================
-   DESIGN TOKENS — Dark theme default, light theme override
+   DESIGN TOKENS — Matrix (dark) default, "green paper" light override
    ============================================================ */
 :root {
-  /* ── Colors: Dark Theme ── */
-  --clr-bg:           #0a0f1e;
-  --clr-bg-secondary: #0f1629;
-  --clr-surface:      #1f2937;
-  --clr-surface-2:    #374151;
-  --clr-border:       #2d3748;
-  --clr-border-light: #4a5568;
+  /* ── Colors: Matrix Theme ── */
+  --clr-bg:           #010a03;
+  --clr-bg-secondary: rgba(0, 14, 5, 0.82);
+  --clr-bg-solid:     #020f05;
+  --clr-surface:      rgba(0, 22, 8, 0.78);
+  --clr-surface-2:    #06260f;
+  --clr-border:       rgba(0, 255, 65, 0.18);
+  --clr-border-light: rgba(0, 255, 65, 0.45);
 
-  --clr-accent:       #6366f1;
-  --clr-accent-2:     #8b5cf6;
-  --clr-accent-3:     #06b6d4;
-  --clr-accent-glow:  rgba(99, 102, 241, 0.25);
-  --clr-accent-glow2: rgba(139, 92, 246, 0.15);
+  --clr-accent:       #00ff41;
+  --clr-accent-2:     #00e5a0;
+  --clr-accent-3:     #008f11;
+  --clr-accent-glow:  rgba(0, 255, 65, 0.35);
+  --clr-accent-glow2: rgba(0, 255, 65, 0.12);
+  --clr-on-accent:    #001a07;
 
-  --clr-text:         #f1f5f9;
-  --clr-text-muted:   #94a3b8;
-  --clr-text-subtle:  #64748b;
-  --clr-text-strong:  #ffffff;
+  --clr-text:         #b8f5c6;
+  --clr-text-muted:   #6dbb82;
+  --clr-text-subtle:  #3f8253;
+  --clr-text-strong:  #eaffef;
 
-  --clr-success:      #10b981;
-  --clr-error:        #ef4444;
-  --clr-warning:      #f59e0b;
+  --clr-success:      #00ff41;
+  --clr-error:        #ff3b5c;
+  --clr-warning:      #f5d000;
+
+  /* Digital rain (read by js/matrix.js) */
+  --rain-head:  #d6ffe0;
+  --rain-tail:  #00ff41;
+  --rain-fade:  rgba(1, 10, 3, 0.09);
+  --rain-opacity: 0.55;
 
   /* ── Typography ── */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-ja:   'Noto Sans JP', 'Hiragino Sans', sans-serif;
-  --font-mono: 'Fira Code', 'Cascadia Code', monospace;
+  --font-sans:    'JetBrains Mono', 'Noto Sans JP', ui-monospace, monospace;
+  --font-display: 'Share Tech Mono', 'JetBrains Mono', 'Noto Sans JP', monospace;
+  --font-ja:      'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Noto Sans JP', ui-monospace, monospace;
 
   --fs-xs:   0.75rem;    /*  12px */
   --fs-sm:   0.875rem;   /*  14px */
   --fs-base: 1rem;       /*  16px */
-  --fs-lg:   1.125rem;   /*  18px */
+  --fs-lg:   1.0625rem;  /*  17px */
   --fs-xl:   1.25rem;    /*  20px */
   --fs-2xl:  1.5rem;     /*  24px */
   --fs-3xl:  1.875rem;   /*  30px */
   --fs-4xl:  2.25rem;    /*  36px */
   --fs-5xl:  3rem;       /*  48px */
-  --fs-hero: clamp(2.4rem, 6vw, 4.5rem);
+  --fs-hero: clamp(2.4rem, 6.5vw, 5rem);
 
   /* ── Spacing ── */
   --space-1:  0.25rem;
@@ -61,26 +70,27 @@
   --nav-height:   72px;
   --content-gap:  clamp(1rem, 3vw, 2rem);
 
-  /* ── Border radius ── */
-  --radius-sm:   4px;
-  --radius-md:   8px;
-  --radius-lg:   12px;
-  --radius-xl:   16px;
-  --radius-2xl:  24px;
+  /* ── Border radius (sharp, terminal-like) ── */
+  --radius-sm:   2px;
+  --radius-md:   2px;
+  --radius-lg:   3px;
+  --radius-xl:   4px;
+  --radius-2xl:  6px;
   --radius-full: 9999px;
 
-  /* ── Shadows ── */
-  --shadow-sm:    0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-md:    0 4px 20px rgba(0,0,0,0.5);
-  --shadow-lg:    0 10px 40px rgba(0,0,0,0.5);
-  --shadow-glow:  0 0 30px var(--clr-accent-glow), 0 0 60px var(--clr-accent-glow2);
-  --shadow-card:  0 4px 24px rgba(0,0,0,0.4);
+  /* ── Shadows / glows ── */
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.6);
+  --shadow-md:    0 4px 20px rgba(0,0,0,0.7);
+  --shadow-lg:    0 10px 40px rgba(0,0,0,0.8);
+  --shadow-glow:  0 0 18px var(--clr-accent-glow), 0 0 48px var(--clr-accent-glow2);
+  --shadow-card:  0 4px 24px rgba(0,0,0,0.6);
+  --text-glow:    0 0 6px var(--clr-accent-glow), 0 0 18px var(--clr-accent-glow2);
 
   /* ── Transitions ── */
   --t-fast:  150ms ease;
   --t-base:  300ms ease;
   --t-slow:  500ms cubic-bezier(0.4, 0, 0.2, 1);
-  --t-enter: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  --t-enter: 700ms cubic-bezier(0.16, 1, 0.3, 1);
 
   /* ── Z-index scale ── */
   --z-below:   -1;
@@ -89,35 +99,46 @@
   --z-nav:    100;
   --z-modal:  200;
   --z-toast:  300;
+  --z-boot:   1000;
 }
 
-/* ── Light Theme ── */
+/* ── Light Theme: green-phosphor on paper ── */
 [data-theme="light"] {
-  --clr-bg:           #f8fafc;
-  --clr-bg-secondary: #f1f5f9;
-  --clr-surface:      #ffffff;
-  --clr-surface-2:    #e2e8f0;
-  --clr-border:       #e2e8f0;
-  --clr-border-light: #cbd5e1;
+  --clr-bg:           #e9f5ec;
+  --clr-bg-secondary: rgba(222, 240, 227, 0.85);
+  --clr-bg-solid:     #def0e3;
+  --clr-surface:      rgba(246, 252, 248, 0.88);
+  --clr-surface-2:    #c9e6d1;
+  --clr-border:       rgba(0, 110, 30, 0.2);
+  --clr-border-light: rgba(0, 110, 30, 0.45);
 
-  --clr-accent-glow:  rgba(99, 102, 241, 0.15);
-  --clr-accent-glow2: rgba(139, 92, 246, 0.08);
+  --clr-accent:       #00852a;
+  --clr-accent-2:     #007a5c;
+  --clr-accent-3:     #005c1c;
+  --clr-accent-glow:  rgba(0, 133, 42, 0.22);
+  --clr-accent-glow2: rgba(0, 133, 42, 0.08);
+  --clr-on-accent:    #f2fff5;
 
-  --clr-text:        #1e293b;
-  --clr-text-muted:  #64748b;
-  --clr-text-subtle: #94a3b8;
-  --clr-text-strong: #0f172a;
+  --clr-text:        #12401f;
+  --clr-text-muted:  #3c6b4a;
+  --clr-text-subtle: #6d9479;
+  --clr-text-strong: #04210d;
 
-  --shadow-sm:   0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-md:   0 4px 20px rgba(0,0,0,0.08);
-  --shadow-lg:   0 10px 40px rgba(0,0,0,0.1);
-  --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+  --rain-head:  #00852a;
+  --rain-tail:  #2e9e52;
+  --rain-fade:  rgba(233, 245, 236, 0.12);
+  --rain-opacity: 0.22;
+
+  --shadow-sm:   0 1px 3px rgba(0,40,10,0.08);
+  --shadow-md:   0 4px 20px rgba(0,40,10,0.08);
+  --shadow-lg:   0 10px 40px rgba(0,40,10,0.1);
+  --shadow-card: 0 4px 24px rgba(0,40,10,0.08);
+  --text-glow:   none;
 }
 
-/* ── Japanese font override ── */
+/* ── Japanese: allow breaking long lines ── */
 :root[lang="ja"],
 [lang="ja"] {
-  font-family: var(--font-ja), var(--font-sans);
   word-break: break-all;
   overflow-wrap: anywhere;
 }

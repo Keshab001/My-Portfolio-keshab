@@ -67,7 +67,7 @@ textarea {
 
 ::selection {
   background: var(--clr-accent);
-  color: #fff;
+  color: var(--clr-on-accent);
 }
 
 /* Scrollbar styling */
@@ -75,11 +75,11 @@ textarea {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--clr-bg-secondary);
+  background: var(--clr-bg-solid);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--clr-surface-2);
-  border-radius: var(--radius-full);
+  background: var(--clr-accent-3);
+  border-radius: var(--radius-sm);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--clr-accent);
