@@ -18,6 +18,7 @@
 
 .section--alt {
   background-color: var(--clr-bg-secondary);
+  border-block: 1px solid var(--clr-border);
 }
 
 /* ── Section header ── */
@@ -26,38 +27,49 @@
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
+/* Label reads like a code comment: // who_i_am */
 .section__label {
   display: inline-block;
+  font-family: var(--font-mono);
   font-size: var(--fs-sm);
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--clr-accent);
   margin-bottom: var(--space-3);
+  text-shadow: var(--text-glow);
+}
+.section__label::before {
+  content: '// ';
+  color: var(--clr-text-subtle);
 }
 
 .section__title {
+  font-family: var(--font-display);
   font-size: clamp(var(--fs-2xl), 4vw, var(--fs-4xl));
-  font-weight: 700;
+  font-weight: 400;
+  letter-spacing: 0.02em;
   color: var(--clr-text-strong);
   line-height: 1.2;
   margin-bottom: var(--space-4);
+  text-shadow: var(--text-glow);
 }
 
+/* Blinking block cursor after every section title */
 .section__title::after {
   content: '';
-  display: block;
-  width: 56px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--clr-accent), var(--clr-accent-2));
-  border-radius: var(--radius-full);
-  margin: var(--space-4) auto 0;
+  display: inline-block;
+  width: 0.55em;
+  height: 0.9em;
+  margin-left: 0.25em;
+  vertical-align: -0.08em;
+  background: var(--clr-accent);
+  box-shadow: 0 0 10px var(--clr-accent-glow);
+  animation: blink 1s step-end infinite;
 }
 
 /* Left-aligned title variant */
-.section__title--left::after {
-  margin-left: 0;
-}
+.section__title--left { text-align: left; }
 
 .section__subtitle {
   font-size: var(--fs-lg);

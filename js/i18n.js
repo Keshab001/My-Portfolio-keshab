@@ -5,10 +5,10 @@ const i18n = (() => {
   const translations = {
     en: {
       // Meta
-      'meta.title': 'Portfolio | Your Name',
+      'meta.title': 'Keshab Khatri | Portfolio',
 
       // Navigation
-      'nav.logo':       'YN',
+      'nav.logo':       'KK',
       'nav.about':      'About',
       'nav.skills':     'Skills',
       'nav.projects':   'Projects',
@@ -17,7 +17,7 @@ const i18n = (() => {
 
       // Hero
       'hero.greeting': "Hello, I'm",
-      'hero.name':     'Your Name',
+      'hero.name':     'Keshab Khatri',
       'hero.title':    'Full Stack Developer',
       'hero.tagline':  'I craft elegant, high-performance web experiences that users love.',
       'hero.cta.work':    'View My Work',
@@ -89,16 +89,16 @@ const i18n = (() => {
       'contact.error.message': 'Please enter a message.',
 
       // Footer
-      'footer.copy': '© 2026 Your Name. All rights reserved.',
+      'footer.copy': '© 2026 Keshab Khatri. All rights reserved.',
       'footer.top':  'Back to Top',
     },
 
     ja: {
       // Meta
-      'meta.title': 'ポートフォリオ | お名前',
+      'meta.title': 'Keshab Khatri | ポートフォリオ',
 
       // Navigation
-      'nav.logo':       'YN',
+      'nav.logo':       'KK',
       'nav.about':      '自己紹介',
       'nav.skills':     'スキル',
       'nav.projects':   'プロジェクト',
@@ -107,7 +107,7 @@ const i18n = (() => {
 
       // Hero
       'hero.greeting': 'はじめまして、',
-      'hero.name':     'お名前',
+      'hero.name':     'Keshab Khatri',
       'hero.title':    'フルスタック開発者',
       'hero.tagline':  'ユーザーに愛される、エレガントで高性能なウェブ体験を作ります。',
       'hero.cta.work':    '作品を見る',
@@ -179,7 +179,7 @@ const i18n = (() => {
       'contact.error.message': 'メッセージを入力してください。',
 
       // Footer
-      'footer.copy': '© 2026 お名前. All rights reserved.',
+      'footer.copy': '© 2026 Keshab Khatri. All rights reserved.',
       'footer.top':  'トップへ戻る',
     }
   };

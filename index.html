@@ -3,15 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Your Name — Full Stack Developer">
-  <meta property="og:title" content="Portfolio | Your Name">
+  <meta name="description" content="Portfolio of Keshab Khatri — Full Stack Developer">
+  <meta name="theme-color" content="#010a03">
+  <meta property="og:title" content="Keshab Khatri | Portfolio">
   <meta property="og:description" content="Full Stack Developer portfolio showcasing projects and skills.">
-  <title>Portfolio | Your Name</title>
+  <title>Keshab Khatri | Portfolio</title>
+
+  <!-- Runs before first paint: restore theme + decide whether to show the boot screen -->
+  <script>
+    (function () {
+      var d = document.documentElement, seen = false;
+      try {
+        var t = localStorage.getItem('portfolio-theme');
+        if (t) d.setAttribute('data-theme', t);
+        seen = sessionStorage.getItem('matrix-booted') === '1';
+      } catch (e) {}
+      if (!seen && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        d.classList.add('booting');
+      }
+    })();
+  </script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <!-- CSS: load order matters (variables must be first) -->
   <link rel="stylesheet" href="css/variables.css">
@@ -23,6 +39,14 @@
 </head>
 <body>
 
+  <!-- Matrix layers: boot screen, digital rain, CRT scanlines (all decorative) -->
+  <div class="boot" id="boot" aria-hidden="true">
+    <p class="boot__text" id="bootText"></p>
+    <span class="boot__skip">Click or press any key to skip</span>
+  </div>
+  <canvas class="matrix-rain" id="matrixRain" aria-hidden="true"></canvas>
+  <div class="crt" aria-hidden="true"></div>
+
   <!-- =====================================================
        NAVIGATION
        ===================================================== -->
@@ -30,7 +54,7 @@
     <div class="nav__inner">
 
       <!-- Logo -->
-      <a href="#hero" class="nav__logo" data-i18n="nav.logo">YN</a>
+      <a href="#hero" class="nav__logo" data-i18n="nav.logo">KK</a>
 
       <!-- Links -->
       <ul class="nav__links" role="list">
@@ -72,15 +96,13 @@
          HERO
          ===================================================== -->
     <section class="hero" id="hero" aria-label="Introduction">
-      <div class="hero__blob hero__blob--1"></div>
-      <div class="hero__blob hero__blob--2"></div>
-
       <div class="hero__inner">
 
         <!-- Content -->
         <div class="hero__content">
+          <p class="hero__prompt" aria-hidden="true"><b>guest@matrix</b>:~$ whoami</p>
           <p class="hero__greeting" data-i18n="hero.greeting">Hello, I'm</p>
-          <h1 class="hero__name" data-i18n="hero.name">Keshab Khatri</h1>
+          <h1 class="hero__name" data-i18n="hero.name" data-text="Keshab Khatri">Keshab Khatri</h1>
           <h2 class="hero__title" data-i18n="hero.title">Full Stack Developer</h2>
           <p class="hero__tagline" data-i18n="hero.tagline">
             I craft elegant, high-performance web experiences that users love.
@@ -107,7 +129,9 @@
               alt="Profile photo"
               loading="eager"
             >
+            <span class="hero__photo-scan" aria-hidden="true"></span>
           </div>
+          <span class="hero__photo-hud" aria-hidden="true">STATUS: ONLINE</span>
 
           <!-- Upload button -->
           <label
@@ -226,8 +250,13 @@
 
           <!-- Project 1 -->
           <article class="project-card">
+            <div class="project-card__bar" aria-hidden="true"><i></i><i></i><i></i><span>~/e-commerce</span></div>
             <div class="project-card__image">
-              <div class="project-card__placeholder">🛒</div>
+              <div class="project-card__placeholder" aria-hidden="true"><pre>$ ./shop --deploy
+[OK] cart.service
+[OK] payments.stripe
+[OK] inventory.sync
+&gt; </pre></div>
             </div>
             <div class="project-card__body">
               <h3 class="project-card__title" data-i18n="projects.p1.title">E-Commerce Platform</h3>
@@ -242,23 +271,21 @@
                 <span class="tag">Stripe</span>
               </div>
               <div class="project-card__links">
-                <a href="#" class="btn btn--sm btn--ghost" data-i18n="projects.github" target="_blank" rel="noopener">
-                  <!-- GitHub SVG -->
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                  GitHub
-                </a>
-                <a href="#" class="btn btn--sm btn--primary" data-i18n="projects.live" target="_blank" rel="noopener">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-                  Live Demo
-                </a>
+                <a href="#" class="btn btn--sm btn--ghost" data-i18n="projects.github" target="_blank" rel="noopener">GitHub</a>
+                <a href="#" class="btn btn--sm btn--primary" data-i18n="projects.live" target="_blank" rel="noopener">Live Demo</a>
               </div>
             </div>
           </article>
 
           <!-- Project 2 -->
           <article class="project-card">
+            <div class="project-card__bar" aria-hidden="true"><i></i><i></i><i></i><span>~/ai-chat</span></div>
             <div class="project-card__image">
-              <div class="project-card__placeholder">🤖</div>
+              <div class="project-card__placeholder" aria-hidden="true"><pre>$ ./ai-chat --serve
+[OK] websocket :8080
+[OK] model.connect
+[OK] moderation.on
+&gt; </pre></div>
             </div>
             <div class="project-card__body">
               <h3 class="project-card__title" data-i18n="projects.p2.title">AI Chat Application</h3>
@@ -273,22 +300,21 @@
                 <span class="tag">React</span>
               </div>
               <div class="project-card__links">
-                <a href="#" class="btn btn--sm btn--ghost" data-i18n="projects.github" target="_blank" rel="noopener">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                  GitHub
-                </a>
-                <a href="#" class="btn btn--sm btn--primary" data-i18n="projects.live" target="_blank" rel="noopener">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-                  Live Demo
-                </a>
+                <a href="#" class="btn btn--sm btn--ghost" data-i18n="projects.github" target="_blank" rel="noopener">GitHub</a>
+                <a href="#" class="btn btn--sm btn--primary" data-i18n="projects.live" target="_blank" rel="noopener">Live Demo</a>
               </div>
             </div>
           </article>
 
           <!-- Project 3 -->
           <article class="project-card">
+            <div class="project-card__bar" aria-hidden="true"><i></i><i></i><i></i><span>~/task-board</span></div>
             <div class="project-card__image">
-              <div class="project-card__placeholder">📋</div>
+              <div class="project-card__placeholder" aria-hidden="true"><pre>$ ./taskboard --start
+[OK] kanban.render
+[OK] drag_drop.ready
+[OK] slack.webhook
+&gt; </pre></div>
             </div>
             <div class="project-card__body">
               <h3 class="project-card__title" data-i18n="projects.p3.title">Task Management SaaS</h3>
@@ -303,14 +329,8 @@
                 <span class="tag">Slack API</span>
               </div>
               <div class="project-card__links">
-                <a href="#" class="btn btn--sm btn--ghost" data-i18n="projects.github" target="_blank" rel="noopener">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                  GitHub
-                </a>
-                <a href="#" class="btn btn--sm btn--primary" data-i18n="projects.live" target="_blank" rel="noopener">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-                  Live Demo
-                </a>
+                <a href="#" class="btn btn--sm btn--ghost" data-i18n="projects.github" target="_blank" rel="noopener">GitHub</a>
+                <a href="#" class="btn btn--sm btn--primary" data-i18n="projects.live" target="_blank" rel="noopener">Live Demo</a>
               </div>
             </div>
           </article>
@@ -361,7 +381,7 @@
 
             <!-- Education -->
             <div class="timeline__item reveal">
-              <div class="timeline__dot" style="background: var(--clr-accent-2)"></div>
+              <div class="timeline__dot timeline__dot--edu"></div>
               <div class="timeline__content">
                 <time class="timeline__date" data-i18n="exp.edu1.date">2017 – 2021</time>
                 <h3 class="timeline__role" data-i18n="exp.edu1.role">B.Sc. Computer Science</h3>
@@ -396,13 +416,13 @@
               to be part of something amazing. My inbox is always open!
             </p>
 
-            <div class="contact__detail">
+            <a class="contact__detail" href="mailto:keshab.nagato@gmail.com">
               <!-- Email icon -->
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
               </svg>
               <span>keshab.nagato@gmail.com</span>
-            </div>
+            </a>
 
             <!-- Social links -->
             <div class="social-links" role="list">
@@ -420,6 +440,7 @@
 
           <!-- Contact form -->
           <form class="contact__form reveal" id="contactForm" novalidate aria-label="Contact form">
+            <div class="contact__form-bar" aria-hidden="true">~/contact &mdash; secure_channel.sh</div>
             <div class="form-group">
               <label for="contactName" data-i18n="contact.name">Name</label>
               <input
@@ -464,10 +485,7 @@
               <span class="form-error" role="alert" data-i18n="contact.error.message">Please enter a message.</span>
             </div>
 
-            <button type="submit" class="btn btn--primary" data-i18n="contact.send">
-              Send Message
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12zm0 0h7.5" /></svg>
-            </button>
+            <button type="submit" class="btn btn--primary" data-i18n="contact.send">Send Message</button>
           </form>
 
         </div>
@@ -481,7 +499,7 @@
        ===================================================== -->
   <footer class="footer" role="contentinfo">
     <div class="footer__inner">
-      <p class="footer__copy" data-i18n="footer.copy">© 2026 Your Name. All rights reserved.</p>
+      <p class="footer__copy" data-i18n="footer.copy">© 2026 Keshab Khatri. All rights reserved.</p>
       <a href="#hero" class="footer__top" data-i18n="footer.top">Back to Top</a>
     </div>
   </footer>
@@ -492,6 +510,7 @@
   <script src="js/skills.js"   defer></script>
   <script src="js/nav.js"      defer></script>
   <script src="js/contact.js"  defer></script>
+  <script src="js/matrix.js"   defer></script>
   <script src="js/main.js"     defer></script>
 
 </body>

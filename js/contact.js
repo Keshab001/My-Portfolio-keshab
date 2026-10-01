@@ -54,7 +54,7 @@ const contactManager = (() => {
       // mailto: fallback — no backend needed
       const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
       const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-      window.location.href = `mailto:your@email.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:keshab.nagato@gmail.com?subject=${subject}&body=${body}`;
 
       // Show success state
       const successMsg = typeof i18n !== 'undefined' ? i18n.t('contact.success') : "Message sent! I'll get back to you soon.";
